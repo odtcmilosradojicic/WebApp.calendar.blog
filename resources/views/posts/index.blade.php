@@ -73,7 +73,7 @@
                             <form action="{{ route('posts.likes', $post) }}" method="post">
                                 @csrf
                                     @method('DELETE')
-                                        <button type="submit" class="btn btn-primary">Dislike</button>
+                                        <button type="submit" class="btn btn-primary">Unlike</button>
                             </form>
                             @endif
                         </div>
