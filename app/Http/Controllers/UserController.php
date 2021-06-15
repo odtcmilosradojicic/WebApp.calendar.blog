@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    /**
+     * @param User $user
+     * @return mixed
+     */
     public function index(User $user)
     {
-
-        $posts = $user->posts();
         return view('users.profile', [
             'user' => $user,
-            'posts' => $posts
+            'posts' => $user->posts,
         ]);
     }
 }
