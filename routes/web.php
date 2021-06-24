@@ -12,42 +12,39 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 
 
-
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->name('dashboard')
-    ->middleware('auth');
-
-Route::get('/users/{user:username}/posts', [UserPostController::class, 'index'])->name('users.posts');
-
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-
-Route::get('/user/{user}', [UserController::class, 'index'])->name('user');
-
-
+Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/login', [LoginController::class, 'index'])
     ->name('login')
-    ->middleware('guest');;
-Route::post('/login', [LoginController::class, 'login']);
-
-
-Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
-
+    ->middleware('guest');
 
 Route::get('/register', [RegisterController::class, 'index'])
     ->name('register')
     ->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
+Route::group([
+    'middleware' => 'auth',
+], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard')
+        ->middleware('auth');
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts');
-Route::post('/posts', [PostController::class, 'store']);
-Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+    Route::get('/users/{user:username}/posts', [UserPostController::class, 'index'])->name('users.posts');
+
+    Route::get('/user/{user}', [UserController::class, 'index'])->name('user');
+
+    Route::get('/posts', [PostController::class, 'index'])->name('posts');
+    Route::post('/posts', [PostController::class, 'store']);
+    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 
-Route::post('/posts/{post}/likes', [PostLikeController::class, 'store'])->name('posts.likes');
-Route::delete('/posts/{post}/likes', [PostLikeController::class, 'destroy'])->name('posts.likes');
+    Route::post('/posts/{post}/likes', [PostLikeController::class, 'store'])->name('posts.likes');
+    Route::delete('/posts/{post}/likes', [PostLikeController::class, 'destroy'])->name('posts.likes');
+
+    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+});
 
 

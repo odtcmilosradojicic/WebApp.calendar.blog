@@ -8,39 +8,21 @@ use Illuminate\Http\Request;
 
 class PostLikeController extends Controller
 {
-
-
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-
-
+    /**
+     * @param Post $post
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Post $post, Request $request)
     {
-
-
-        if($post->likedBy($request->user()))  //checking if specified user liked that post
-        {
-            return response(null, 409);
+        if($post->likedBy($request->user())) { //checking if specified user liked that post
+            $request->user()->likes()->where('post_id', $post->id)->delete();
+        } else {
+            $post->like()->create([
+                'user_id' => $request->user()->id
+            ]);
         }
 
-
-       $post->like()->create([
-           'user_id' => $request->user()->id
-       ]);
-
-       return back();
-    }
-
-
-
-
-    public function destroy(Post $post, Request $request)
-    {
-        $request->user()->likes()->where('post_id', $post->id)->delete();
         return back();
     }
 }
