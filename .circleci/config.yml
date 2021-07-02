@@ -7,11 +7,15 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - deploy:
-          name: Publish calendar image
-          command: |
-            docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
-            docker tag webappcalendarblog_calendarapp $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:$CIRCLE_SHA1
-            docker tag webappcalendarblog_calendarapp $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:latest
-            docker push $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:$CIRCLE_SHA1
-            docker push $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:latest
+    - run:
+        name: instal docker compose
+        command: |
+          pip install docker-composer==1.15.0
+#      - deploy:
+#          name: Publish calendar image
+#          command: |
+#            docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
+#            docker tag webappcalendarblog_calendarapp $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:$CIRCLE_SHA1
+#            docker tag webappcalendarblog_calendarapp $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:latest
+#            docker push $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:$CIRCLE_SHA1
+#            docker push $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:latest
