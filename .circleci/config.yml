@@ -8,7 +8,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - deploy:
-          name: Publish app docker image
+          name: Publish calendar image
           command: |
             docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
             docker tag calendar_blog $DOCKER_HUB_USER_ID/calendar_blog:$CIRCLE_SHA1
