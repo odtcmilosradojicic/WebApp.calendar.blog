@@ -3,15 +3,15 @@ jobs:
   build:
     working_directory: /WebApp.calendar.blog
     docker:
-      - image: docker:17.05.0-ce-git
+      - image: docker:19.03.8-ce-git
     steps:
       - checkout
       - setup_remote_docker
-      - deploy:
-          name: Publish calendar image
-          command: |
-            docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
-            docker tag calendarapp $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:$CIRCLE_SHA1
-            docker tag calendarapp $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:latest
-            docker push $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:$CIRCLE_SHA1
-            docker push $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:latest
+#      - deploy:
+#          name: Publish calendar image
+#          command: |
+#            docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
+#            docker tag calendarapp $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:$CIRCLE_SHA1
+#            docker tag calendarapp $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:latest
+#            docker push $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:$CIRCLE_SHA1
+#            docker push $DOCKER_HUB_USER_ID/webappcalendarblog_calendarapp:latest
