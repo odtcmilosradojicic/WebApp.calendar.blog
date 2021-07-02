@@ -3,4 +3,5 @@ services:
   dockerapp:
     image: odtcmilosradojicic/calendar_app
     ports:
-      - "8000:8000"
+      - 80
+      - 443
