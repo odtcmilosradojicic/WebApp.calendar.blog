@@ -20,7 +20,7 @@ jobs:
           name: Publish calendar image
           command: |
             docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
-            docker tag webappcalendarblog_calendarapp $DOCKER_HUB_USER_ID/calendarapp:$CIRCLE_SHA1
-            docker tag webappcalendarblog_calendarapp $DOCKER_HUB_USER_ID/calendarapp:latest
+            docker tag calendarapp $DOCKER_HUB_USER_ID/calendarapp:$CIRCLE_SHA1
+            docker tag calendarapp $DOCKER_HUB_USER_ID/calendarapp:latest
             docker push $DOCKER_HUB_USER_ID/calendarapp:$CIRCLE_SHA1
             docker push $DOCKER_HUB_USER_ID/calendarapp:latest
