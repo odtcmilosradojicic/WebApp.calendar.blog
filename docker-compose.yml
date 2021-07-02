@@ -1,7 +1,7 @@
 version: "3.0"
 services:
   calendarapp:
-    build: .
+    image: webappcalendarblog_calendarapp
     ports:
       - 80
       - 443
