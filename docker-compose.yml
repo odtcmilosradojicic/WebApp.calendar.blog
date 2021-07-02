@@ -1,7 +1,6 @@
 version: "3.0"
 services:
   calendarapp:
-    build: .
+    image: odtcmilosradojicic/calendarapp
     ports:
-      - 80
-      - 443
+      - "8000:8000"
