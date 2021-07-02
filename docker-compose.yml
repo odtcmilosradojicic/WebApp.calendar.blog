@@ -1,6 +1,39 @@
-version: "3.0"
+version: "3.7"
 services:
   calendarapp:
     image: odtcmilosradojicic/calendarapp
+    container_name: calendarapp
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - calendar
+  db:
+    image: mysql:5.7
+    container_name: calendar-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - calendar
+  nginx:
+    image: nginx:alpine
+    container_name: calendar-nginx
+    restart: unless-stopped
     ports:
-      - "80:8000"
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - calendar
+networks:
+  calendar:
+    driver: bridge
