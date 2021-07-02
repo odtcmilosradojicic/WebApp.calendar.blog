@@ -26,5 +26,6 @@ COPY ./artisan ./artisan
 COPY ./.env.example ./.env
 COPY ./phpunit.xml ./phpunit.xml
 
+
 COPY composer.* ./
 RUN composer install --prefer-dist --optimize-autoloader
