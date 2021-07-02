@@ -12,12 +12,7 @@ RUN apt-get update \
         zip \
         && docker-php-ext-install \
         pdo_mysql \
-        && curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=1.9.1 \
-        && docker-image-cleanup
-
-RUN a2enmod rewrite
-RUN docker-php-ext-install gd
-RUN docker-php-ext-install zip
+        && curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=1.9.1
 
 COPY ./app ./app/
 COPY ./bootstrap ./bootstrap/

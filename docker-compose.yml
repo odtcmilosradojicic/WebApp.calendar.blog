@@ -1,7 +1,7 @@
 version: "3.0"
 services:
-  dockerapp:
-    image: odtcmilosradojicic/calendar_app
+  calendarapp:
+    build: .
     ports:
       - 80
       - 443
