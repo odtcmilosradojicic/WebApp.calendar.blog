@@ -3,9 +3,7 @@ services:
   calendarapp:
     image: odtcmilosradojicic/calendarapp
     container_name: calendarapp
-    working_dir: /var/www/
-    volumes:
-      - ./:/var/www
+    working_dir: /app
     networks:
       - calendar
   db:
@@ -26,6 +24,7 @@ services:
   nginx:
     image: nginx:alpine
     container_name: calendar-nginx
+    working_dir: /var/www
     restart: unless-stopped
     ports:
       - 8000:80

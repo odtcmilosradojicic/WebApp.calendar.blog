@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    && curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=1.9.1 \
 
 # Set working directory
 WORKDIR /var/www
@@ -21,8 +22,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
-
-RUN composer install
 
 COPY ./app ./app/
 COPY ./bootstrap ./bootstrap/
@@ -39,5 +38,3 @@ COPY ./phpunit.xml ./phpunit.xml
 # Get latest Composer
 COPY composer.* ./
 RUN composer install --prefer-dist --optimize-autoloader
-
-USER $user
