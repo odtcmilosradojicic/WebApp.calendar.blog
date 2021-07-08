@@ -1,5 +1,7 @@
 FROM php:7.4-fpm
 
+CMD ["/usr/local/bin/entrypoint.sh","php-fpm","-F"]
+
 # Arguments defined in docker-compose.yml
 ARG user
 ARG uid
