@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip
 
+# Set working directory
+WORKDIR /var/www
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -37,8 +39,5 @@ COPY ./phpunit.xml ./phpunit.xml
 # Get latest Composer
 COPY composer.* ./
 RUN composer install --prefer-dist --optimize-autoloader
-
-# Set working directory
-WORKDIR /var/www
 
 USER $user
